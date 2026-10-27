@@ -41,7 +41,7 @@ Then open http://localhost:4321.
 
 ## Deployment
 
-Any static host works (Netlify, Vercel, Cloudflare Pages, FTP). For example, with Netlify Drop: drag the `public` folder to https://app.netlify.com/drop.
+Any static host works (Netlify, Vercel, Cloudflare Pages, FTP). For example, with Netlify Drop: drag the `public` folder to https://app.netlify.com/drop. To update an existing site, drag `public` (not the project folder) to the dropzone on the site's **Deploys** page.
 
 ## Media
 
@@ -49,17 +49,17 @@ Media files are not included in the repository. Until a file is added, a branded
 
 | What | File | Format |
 |---|---|---|
-| Hero video | `public/assets/video/hero.mp4` + `hero-poster.jpg` | 9:16, H.264, up to ~8 MB |
-| Reels 1–5 | `public/assets/reels/reel-1.mp4` … `reel-5.mp4` + `reel-N.jpg` (preview) | 9:16 |
+| Hero video | `public/assets/video/hero.mp4` + `hero-poster.jpg` | 9:16, H.264, 720×1280 |
+| Reels | `public/assets/reels/<name>.mp4` + `<name>.jpg` (cover); captions and order in `index.html` (`reels__track`) | 9:16, H.264, 720×1280 |
 | Photos 1–6 | `public/assets/photos/photo-1.jpg` … `photo-6.jpg` | 1 and 6 wide (3:2); 2–5 any, center-cropped |
 
-Tip: compress videos to 1080×1920 at ~4–6 Mbit/s:
+Videos are encoded as H.264 720×1280 at ~1.5–2 Mbit/s with AAC 128 kbit/s audio and fast start, so they play in every browser and start before fully downloading (iPhone HEVC sources of 45–55 MB end up at 5–11 MB):
 
 ```bash
-ffmpeg -i in.mov -vf scale=1080:-2 -c:v libx264 -crf 24 -preset slow -an out.mp4
+ffmpeg -i in.mov -vf scale=720:-2 -c:v libx264 -b:v 1.8M -maxrate 2.5M -bufsize 4M -c:a aac -b:a 128k -movflags +faststart out.mp4
 ```
 
-(keep the audio for the hero video by removing `-an`).
+Add a cover frame (720×1280 JPG) for every video: without it, iPhones in Low Power Mode show the placeholder instead of a frame.
 
 ## Contact form (Web3Forms)
 

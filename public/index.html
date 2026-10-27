@@ -3,20 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>WW Agency — video prehliadky a fotografie nehnuteľností | Bratislava</title>
-  <meta name="description" content="Dynamické vertikálne video prehliadky, Reels a profesionálna fotografia nehnuteľností pre realitných maklérov. Bratislava a okolie, dodanie do 72 hodín.">
+  <title>WW Agency</title>
+  <meta name="description" content="Dynamické vertikálne video prehliadky, Reels a profesionálna fotografia nehnuteľností pre realitných maklérov. Bratislava a okolie, dodanie do 3 pracovných dní.">
   <link rel="canonical" href="https://wwagency.eu/">
   <meta name="theme-color" content="#1C2B48">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="sk_SK">
   <meta property="og:site_name" content="WW Agency">
-  <meta property="og:title" content="WW Agency — Real Estate Media">
+  <meta property="og:title" content="WW Agency">
   <meta property="og:description" content="Každá ponuka je vaša vizitka. Vyniknite na dnešnom trhu.">
   <meta property="og:url" content="https://wwagency.eu/">
   <!-- <meta property="og:image" content="https://wwagency.eu/assets/og-image.jpg"> -->
 
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
 
   <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -36,6 +39,9 @@
     "address": { "@type": "PostalAddress", "addressLocality": "Bratislava", "addressCountry": "SK" },
     "sameAs": ["https://www.instagram.com/wwagency.eu/"]
   }
+  </script>
+  <script type="application/ld+json">
+  { "@context": "https://schema.org", "@type": "WebSite", "name": "WW Agency", "url": "https://wwagency.eu/" }
   </script>
 </head>
 <body>
@@ -88,8 +94,8 @@
             <a class="btn btn--ghost" href="#kontakt">Kontaktujte nás</a>
           </div>
           <ul class="hero__facts reveal">
-            <li><strong>do 72 h</strong><span>dodanie hotového videa</span></li>
-            <li><strong>60–90 min</strong><span>natáčanie na lokácii</span></li>
+            <li><strong>Do 3 pracovných dní</strong><span>dodanie hotového videa</span></li>
+            <li><strong>Na kľúč</strong><span>od konceptu po hotový strih</span></li>
             <li><strong>Bratislava</strong><span>a okolie</span></li>
           </ul>
         </div>
@@ -122,7 +128,7 @@
             <span class="eyebrow reveal">Filozofia a prístup</span>
             <h2 class="h2 reveal">Prečo WW Agency</h2>
           </div>
-          <p class="why__motto reveal"><span class="script">win-win</span> WW znamená win-win. Keď vyhráva klient, vyhrávame aj my.</p>
+          <p class="why__motto reveal"><span class="script">win-win</span> Náš prístup k spolupráci. Keď vyhráva klient, vyhrávame aj my.</p>
         </div>
 
         <div class="why__grid">
@@ -138,7 +144,7 @@
               <svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10.5l5-3v9l-5-3"/><path d="M7 3.5v1M10.5 3v1.5M3.5 3.5l1 1"/></svg>
             </span>
             <h3 class="h4">Moderná postprodukcia</h3>
-            <p>Plynulé cinematické prechody, čistá stabilizácia a pokročilé 3D textové efekty integrované priamo do priestoru.</p>
+            <p>Precízny strih, moderné vizuálne trendy a plynulá dynamika. Využívame pokročilé postprodukčné techniky, vďaka ktorým video pôsobí prémiovo, sviežo a udrží diváka až do konca.</p>
           </article>
           <article class="card why-card reveal">
             <span class="icon-tile" aria-hidden="true">
@@ -152,7 +158,7 @@
               <svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>
             </span>
             <h3 class="h4">Rýchle dodanie</h3>
-            <p>Hotové materiály pripravené na publikovanie v termínoch, ktoré zodpovedajú dynamike realitného trhu <strong>(do&nbsp;72&nbsp;hodín)</strong>.</p>
+            <p>Hotové materiály pripravené na publikovanie v termínoch, ktoré zodpovedajú dynamike realitného trhu (do&nbsp;3&nbsp;pracovných dní).</p>
           </article>
         </div>
       </div>
@@ -179,52 +185,57 @@
         </div>
       </div>
 
-      <!-- Video: assets/reels/reel-N.mp4, náhľad: assets/reels/reel-N.jpg -->
+      <!-- Video: assets/reels/<nazov>.mp4 + náhľad <nazov>.jpg (720×1280) -->
       <div class="reels" data-reels>
         <ul class="reels__track" data-reel-track>
           <li class="reel">
-            <button class="reel__btn" type="button" data-video="assets/reels/reel-1.mp4" data-title="Byt s 3D textom v priestore">
-              <img class="reel__img media-img" src="assets/reels/reel-1.jpg" alt="" loading="lazy">
-              <span class="ph ph--dark ph--v1" aria-hidden="true"><span class="ph__title">3D text v&nbsp;priestore</span></span>
+            <button class="reel__btn" type="button" data-video="assets/reels/bukurestska.mp4" data-title="Zrekonštruovaný byt — Bukureštská">
+              <img class="reel__img media-img" src="assets/reels/bukurestska.jpg" alt="" loading="lazy" width="720" height="1280">
+              <video class="reel__preview" data-preview="assets/reels/previews/bukurestska.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+              <span class="ph ph--dark ph--v1" aria-hidden="true"><span class="ph__title">Zrekonštruovaný byt, Bukureštská</span></span>
               <span class="reel__badge">Reel</span>
               <span class="reel__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
-              <span class="reel__title">Byt s 3D textom v priestore</span>
+              <span class="reel__title">Zrekonštruovaný byt — Bukureštská</span>
             </button>
           </li>
           <li class="reel">
-            <button class="reel__btn" type="button" data-video="assets/reels/reel-2.mp4" data-title="Dynamická prehliadka rodinného domu">
-              <img class="reel__img media-img" src="assets/reels/reel-2.jpg" alt="" loading="lazy">
-              <span class="ph ph--dark ph--v2" aria-hidden="true"><span class="ph__title">Rodinný dom</span></span>
+            <button class="reel__btn" type="button" data-video="assets/reels/nivy.mp4" data-title="4-izbový byt pri Nivách">
+              <img class="reel__img media-img" src="assets/reels/nivy.jpg" alt="" loading="lazy" width="720" height="1280">
+              <video class="reel__preview" data-preview="assets/reels/previews/nivy.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+              <span class="ph ph--dark ph--v2" aria-hidden="true"><span class="ph__title">4-izbový byt pri Nivách</span></span>
               <span class="reel__badge">Reel</span>
               <span class="reel__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
-              <span class="reel__title">Dynamická prehliadka rodinného domu</span>
+              <span class="reel__title">4-izbový byt pri Nivách</span>
             </button>
           </li>
           <li class="reel">
-            <button class="reel__btn" type="button" data-video="assets/reels/reel-3.mp4" data-title="Osobná prezentácia makléra na lokácii">
-              <img class="reel__img media-img" src="assets/reels/reel-3.jpg" alt="" loading="lazy">
-              <span class="ph ph--dark ph--v3" aria-hidden="true"><span class="ph__title">Maklér na lokácii</span></span>
+            <button class="reel__btn" type="button" data-video="assets/reels/slnecnice.mp4" data-title="Byt v Slnečniciach">
+              <img class="reel__img media-img" src="assets/reels/slnecnice.jpg" alt="" loading="lazy" width="720" height="1280">
+              <video class="reel__preview" data-preview="assets/reels/previews/slnecnice.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+              <span class="ph ph--dark ph--v3" aria-hidden="true"><span class="ph__title">Byt v Slnečniciach</span></span>
               <span class="reel__badge">Reel</span>
               <span class="reel__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
-              <span class="reel__title">Osobná prezentácia makléra na lokácii</span>
+              <span class="reel__title">Byt v Slnečniciach</span>
             </button>
           </li>
           <li class="reel">
-            <button class="reel__btn" type="button" data-video="assets/reels/reel-4.mp4" data-title="Dizajnový 2-izbový byt v novostavbe">
-              <img class="reel__img media-img" src="assets/reels/reel-4.jpg" alt="" loading="lazy">
-              <span class="ph ph--dark ph--v4" aria-hidden="true"><span class="ph__title">2-izbový byt</span></span>
+            <button class="reel__btn" type="button" data-video="assets/reels/nebytovy-priestor.mp4" data-title="Nebytový priestor s terasou">
+              <img class="reel__img media-img" src="assets/reels/nebytovy-priestor.jpg" alt="" loading="lazy" width="720" height="1280">
+              <video class="reel__preview" data-preview="assets/reels/previews/nebytovy-priestor.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+              <span class="ph ph--dark ph--v4" aria-hidden="true"><span class="ph__title">Nebytový priestor s terasou</span></span>
               <span class="reel__badge">Reel</span>
               <span class="reel__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
-              <span class="reel__title">Dizajnový 2-izbový byt v novostavbe</span>
+              <span class="reel__title">Nebytový priestor s terasou</span>
             </button>
           </li>
           <li class="reel">
-            <button class="reel__btn" type="button" data-video="assets/reels/reel-5.mp4" data-title="Exkluzívny penthouse — večerná atmosféra">
-              <img class="reel__img media-img" src="assets/reels/reel-5.jpg" alt="" loading="lazy">
-              <span class="ph ph--dark ph--v5" aria-hidden="true"><span class="ph__title">Penthouse</span></span>
+            <button class="reel__btn" type="button" data-video="assets/reels/zahradka.mp4" data-title="Záhrada s chatkou">
+              <img class="reel__img media-img" src="assets/reels/zahradka.jpg" alt="" loading="lazy" width="720" height="1280">
+              <video class="reel__preview" data-preview="assets/reels/previews/zahradka.mp4" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+              <span class="ph ph--dark ph--v5" aria-hidden="true"><span class="ph__title">Záhrada s chatkou</span></span>
               <span class="reel__badge">Reel</span>
               <span class="reel__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span>
-              <span class="reel__title">Exkluzívny penthouse — večerná atmosféra</span>
+              <span class="reel__title">Záhrada s chatkou</span>
             </button>
           </li>
         </ul>
@@ -295,11 +306,19 @@
               <h3 class="h3">Štandardné vertikálne video</h3>
             </div>
             <p class="service__fit"><span>Vhodné pre</span> Menšie byty, 1- až 3-izbové nehnuteľnosti, štartovacie bývanie a rýchly predaj.</p>
-            <p>Svieža, plynulá a moderná video prehliadka vo vertikálnom formáte. Zameriavame sa na čisté zábery, prirodzené svetlo a dynamický strih, ktorý priestor ukáže prehľadne a bez zbytočného naťahovania. Skvelá voľba pre pravidelný obsah a rýchle zaujatie záujemcov na sociálnych sieťach (Reels / Shorts / TikTok).</p>
-            <p class="service__result"><span>Výsledok</span> Jasná, profesionálna prezentácia, ktorá pôsobí podstatne lepšie ako bežné video z telefónu.</p>
-            <a class="service__cta" href="#kontakt" data-service="Štandardné vertikálne video">Mám záujem
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
+            <p>Čistá, dynamická a moderná videoprehliadka zameraná na rýchle predstavenie dispozície a atmosféry bytu. Skvelá voľba pre pravidelný obsah a okamžité zaujatie záujemcov bez zbytočného zdržiavania.</p>
+            <ul class="service__terms">
+              <li><b>Spracovanie:</b> štandardný dynamický strih s kľúčovými údajmi</li>
+              <li><b>Využitie AI:</b> nezahrnuté v balíku</li>
+              <li><b>Pripomienky:</b> 1 kolo úprav v cene</li>
+              <li><b>Dodanie:</b> do 3 pracovných dní</li>
+            </ul>
+            <div class="service__foot">
+              <p class="service__price"><span>Cena</span> od 140&nbsp;€</p>
+              <a class="service__cta" href="#kontakt" data-service="Štandardné vertikálne video">Mám záujem
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
           </article>
 
           <article class="card service service--featured reveal">
@@ -308,11 +327,19 @@
               <h3 class="h3">Premium vertikálne video</h3>
             </div>
             <p class="service__fit"><span>Vhodné pre</span> Prémiové byty, rodinné domy, novostavby, vily a dizajnové nehnuteľnosti, ktoré potrebujú vyniknúť.</p>
-            <p>Prezentácia novej generácie pre objekty, kde rozhoduje atmosféra, detail a silný prvý dojem. Kladieme dôraz na precíznu filmovú kompozíciu, prácu so svetlom a pokročilú postprodukciu, ktorá prirodzene zvýrazní architektúru aj hodnotné materiály. Výsledkom nie je len obyčajná prehliadka izieb, ale ucelený vizuálny zážitok, ktorý v divákovi vyvolá emóciu a pocit prémiového bývania.</p>
-            <p class="service__result"><span>Výsledok</span> Vizuál, ktorý okamžite zvyšuje vnímanú hodnotu samotnej nehnuteľnosti a posilňuje vašu povesť makléra, ktorý predáva na najvyššej úrovni.</p>
-            <a class="service__cta" href="#kontakt" data-service="Premium vertikálne video s 3D efektmi">Mám záujem
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
+            <p>Prezentácia s dôrazom na prémiový detail, atmosféru a silný prvý dojem. Vizuál, ktorý pomáha obhájiť vyššiu hodnotu ponuky a buduje vašu povesť makléra, ktorý predáva na najvyššej úrovni.</p>
+            <ul class="service__terms">
+              <li><b>Spracovanie:</b> prémiový strih s dôrazom na detail a atmosféru</li>
+              <li><b>Využitie AI:</b> zahrnuté v balíku (staging a vylepšenie priestoru)</li>
+              <li><b>Pripomienky:</b> 2 kolá detailných úprav v cene</li>
+              <li><b>Dodanie:</b> do 3 pracovných dní</li>
+            </ul>
+            <div class="service__foot">
+              <p class="service__price"><span>Cena</span> od 240&nbsp;€</p>
+              <a class="service__cta" href="#kontakt" data-service="Premium vertikálne video s 3D efektmi">Mám záujem
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
           </article>
 
           <article class="card service reveal">
@@ -320,10 +347,19 @@
               <span class="service__num">03</span>
               <h3 class="h3">Profesionálna fotografia nehnuteľností</h3>
             </div>
-            <p>Prvý kontakt záujemcu s vašou ponukou prebieha cez fotografie. Dbáme na čisté línie, prirodzené svetlo a reálne farby, vďaka ktorým priestor pôsobí vzdušne, priestranne a lákavo. Zábery cielene vyzdvihujú prednosti dispozície, zastavia pozornosť pri scrollovaní na inzertných portáloch a motivujú záujemcov dohodnúť si osobnú obhliadku.</p>
-            <a class="service__cta" href="#kontakt" data-service="Profesionálna fotografia">Mám záujem
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
+            <p>Prvý kontakt záujemcu s ponukou prebieha cez fotografie na portáloch. Kladieme dôraz na čisté línie, prirodzené denné svetlo a reálne farby, vďaka ktorým pôsobí priestor vzdušne, priestranne a lákavo.</p>
+            <ul class="service__terms">
+              <li><b>Spracovanie:</b> precízna retuš, práca so svetlom a verné farby</li>
+              <li><b>Výstup:</b> kompletná séria záberov interiéru, exteriéru a detailov</li>
+              <li>Pripravené priamo pre inzertné portály a web</li>
+              <li><b>Dodanie:</b> do 2 pracovných dní</li>
+            </ul>
+            <div class="service__foot">
+              <p class="service__price"><span>Cena</span> od 90&nbsp;€</p>
+              <a class="service__cta" href="#kontakt" data-service="Profesionálna fotografia">Mám záujem
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
           </article>
 
           <article class="card service reveal">
@@ -331,10 +367,18 @@
               <span class="service__num">04</span>
               <h3 class="h3">Osobná prezentácia a branding makléra</h3>
             </div>
-            <p>Ľudia nekupujú nehnuteľnosti len na základe parametrov, ale vyberajú si človeka, ktorému dôverujú. Vytvárame promo videá a moderné expertné Reels, ktoré zrozumiteľne ukazujú vaše skúsenosti, výsledky a profesionálny prístup k práci. Pomôžeme vám s témami, štruktúrou aj prirodzeným vystupovaním pred kamerou tak, aby si vás majitelia zapamätali a sami vás oslovovali s predajom.</p>
-            <a class="service__cta" href="#kontakt" data-service="Osobná prezentácia makléra">Mám záujem
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
+            <p>Klienti si vyberajú makléra, ktorému dôverujú a rozumejú jeho hodnotám. Tvoríme prezentačné a expertné videá, v ktorých jasne predstavíte svoj prístup k práci, rozsah služieb a výhody spolupráce práve s vami.</p>
+            <ul class="service__terms">
+              <li><b>Príprava:</b> pomoc s témami, štruktúrou reči a scenárom predstavenia</li>
+              <li><b>Spracovanie:</b> moderný strih s grafikou ladiacou k vašej značke</li>
+              <li><b>Dodanie:</b> do 3 pracovných dní</li>
+            </ul>
+            <div class="service__foot">
+              <p class="service__price"><span>Cena</span> od 190&nbsp;€</p>
+              <a class="service__cta" href="#kontakt" data-service="Osobná prezentácia makléra">Mám záujem
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
           </article>
         </div>
       </div>
@@ -357,14 +401,12 @@
           <li class="step reveal">
             <span class="step__num">02</span>
             <h3 class="h4">Rýchle natáčanie na lokácii</h3>
-            <p>Na mieste pracujeme samostatne a efektívne s profesionálnou technikou. Bežné natáčanie trvá približne 60–90 minút.</p>
-            <span class="chip">60–90 min</span>
+            <p>Na lokáciu prichádzame pripravení s jasnou predstavou o záberoch. Ak stojíte pred kamerou, prevedieme vás celým procesom, pomôžeme s prejavom a postaráme sa o to, aby ste pôsobili prirodzene a sebavedomo.</p>
           </li>
           <li class="step reveal">
             <span class="step__num">03</span>
             <h3 class="h4">Dodanie hotových výstupov</h3>
-            <p>Do 72 hodín vám odošleme hotové video pripravené na okamžité zverejnenie na sociálnych sieťach a inzertných portáloch.</p>
-            <span class="chip">do 72 h</span>
+            <p>Do 3 pracovných dní vám odošleme hotové video pripravené na okamžité zverejnenie na sociálnych sieťach a inzertných portáloch.</p>
           </li>
         </ol>
       </div>

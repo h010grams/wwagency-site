@@ -25,7 +25,7 @@
     burger.setAttribute('aria-label', open ? 'Zavrieť menu' : 'Otvoriť menu');
     nav.classList.toggle('is-open', open);
     header.classList.toggle('menu-open', open);
-    document.body.style.overflow = open ? 'hidden' : '';
+    document.documentElement.classList.toggle('is-locked', open);
   };
   burger.addEventListener('click', () => setMenu(burger.getAttribute('aria-expanded') !== 'true'));
   nav.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
@@ -61,20 +61,58 @@
     reveals.forEach((el) => io.observe(el));
   }
 
-  /* ---------- hero video ---------- */
+  /* ---------- hero video ----------
+     The branded placeholder is shown by default; the player switches on only once the video
+     (or its poster) has actually loaded. iOS Safari never preloads video, so without this it
+     would show an empty grey player when the file is missing. */
   const frame = $('[data-hero-video]');
   if (frame) {
     const video = $('video', frame);
     const playBtn = $('[data-play]', frame);
     const soundBtn = $('[data-sound]', frame);
-    let missing = false;
+    const hasVideo = () => frame.classList.contains('has-video');
+    playBtn.disabled = true;
 
-    const setMissing = () => { missing = true; frame.classList.add('is-missing'); frame.classList.remove('is-playing'); };
-    video.addEventListener('error', setMissing);
-    $$('source', video).forEach((s) => s.addEventListener('error', setMissing));
-    if (video.error || video.networkState === HTMLMediaElement.NETWORK_NO_SOURCE) setMissing();
+    // silent autoplay while visible (skipped for reduced motion / data saver). It is retried once the
+    // player becomes visible (Safari won't autoplay hidden video) and on the first tap or click
+    // (iOS Low Power Mode allows playback only from a user gesture).
+    const autoplayAllowed = !reducedMotion && !(navigator.connection && navigator.connection.saveData);
+    let heroInView = false;
+    const tryAutoplay = () => {
+      if (autoplayAllowed && heroInView && hasVideo() && video.muted && video.paused && !frame.dataset.userPaused) {
+        video.play().catch(() => {});
+      }
+    };
+
+    // has-video: controls active; is-ready: a frame or the poster can be shown
+    const enable = () => {
+      if (video.error) return;
+      frame.classList.add('has-video');
+      playBtn.disabled = false;
+    };
+    const ready = () => {
+      if (video.error) return;
+      enable();
+      frame.classList.add('is-ready');
+      tryAutoplay();
+    };
+    const disable = () => {
+      frame.classList.remove('has-video', 'is-ready', 'is-playing');
+      playBtn.disabled = true;
+    };
+    video.addEventListener('error', disable);
+    video.addEventListener('loadedmetadata', enable);
+    video.addEventListener('loadeddata', ready);
+    video.addEventListener('playing', ready);
     video.addEventListener('play', () => frame.classList.add('is-playing'));
     video.addEventListener('pause', () => frame.classList.remove('is-playing'));
+    if (video.readyState >= 2) ready();
+    else if (video.readyState >= 1) enable();
+    if (video.getAttribute('poster')) {
+      const poster = new Image();
+      poster.onload = ready;
+      poster.src = video.poster;
+    }
 
     const syncSound = () => {
       soundBtn.setAttribute('aria-pressed', String(!video.muted));
@@ -82,14 +120,16 @@
     };
 
     playBtn.addEventListener('click', () => {
-      if (missing) return;
+      if (!hasVideo()) return;
       if (video.paused) {
         // first explicit play → start from the hook with sound
         if (video.muted && !frame.dataset.started) { video.currentTime = 0; video.muted = false; syncSound(); }
         frame.dataset.started = '1';
+        delete frame.dataset.userPaused;
         video.play().catch(() => {});
         playBtn.setAttribute('aria-label', 'Pozastaviť video');
       } else {
+        frame.dataset.userPaused = '1';
         video.pause();
         playBtn.setAttribute('aria-label', 'Prehrať video');
       }
@@ -101,15 +141,12 @@
       syncSound();
     });
 
-    // silent autoplay preview when visible (skipped for reduced motion / data saver)
-    const saveData = navigator.connection && navigator.connection.saveData;
-    if (!reducedMotion && !saveData) {
-      new IntersectionObserver(([entry]) => {
-        if (missing) return;
-        if (entry.isIntersecting && video.muted) video.play().catch(() => {});
-        else if (!entry.isIntersecting) video.pause();
-      }, { threshold: 0.4 }).observe(frame);
-    }
+    new IntersectionObserver(([entry]) => {
+      heroInView = entry.isIntersecting;
+      if (heroInView) tryAutoplay();
+      else if (!video.paused) video.pause();
+    }, { threshold: 0.4 }).observe(frame);
+    ['touchend', 'click', 'keydown'].forEach((t) => document.addEventListener(t, tryAutoplay, { passive: true }));
   }
 
   /* ---------- reels carousel ---------- */
@@ -221,6 +258,59 @@
     if (e.key === 'ArrowLeft') showPhoto(photoIndex - 1);
     if (e.key === 'ArrowRight') showPhoto(photoIndex + 1);
   });
+
+  /* ---------- reel preview loops ----------
+     4-second silent clips (~300 KB) play only for cards that are actually on screen:
+     on desktop the visible ones, on a phone the one card in view. Paused while the
+     section is off screen or a video/photo is open; skipped for reduced motion / data saver. */
+  const reelCards = $$('.reel');
+  const dataSaver = navigator.connection && navigator.connection.saveData;
+  if (track && reelCards.length && !reducedMotion && !dataSaver && 'IntersectionObserver' in window) {
+    const inView = new Set();
+    let sectionVisible = false;
+
+    const activate = (card, v) => {
+      if (!v.getAttribute('src')) {
+        // Show the clip right away with the cover as its poster: nothing changes visually, and
+        // Safari doesn't treat it as a hidden video (those are not allowed to autoplay).
+        const cover = $('.reel__img', card);
+        if (cover && !cover.classList.contains('is-missing')) v.poster = cover.currentSrc || cover.src;
+        v.muted = true;
+        v.src = v.dataset.preview;
+        card.classList.add('is-previewing');
+      }
+      v.play().catch(() => {});
+    };
+
+    const syncPreviews = () => {
+      reelCards.forEach((card) => {
+        const v = $('.reel__preview', card);
+        if (!v) return;
+        if (sectionVisible && !modal.open && inView.has(card)) activate(card, v);
+        else if (!v.paused) v.pause();
+      });
+    };
+
+    reelCards.forEach((card) => {
+      const v = $('.reel__preview', card);
+      if (!v) return;
+      v.addEventListener('error', () => card.classList.remove('is-previewing'));
+    });
+
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach((e) => (e.isIntersecting ? inView.add(e.target) : inView.delete(e.target)));
+      syncPreviews();
+    }, { root: track, threshold: 0.75 });
+    reelCards.forEach((card) => cardObserver.observe(card));
+
+    new IntersectionObserver(([e]) => { sectionVisible = e.isIntersecting; syncPreviews(); }, { threshold: 0.25 }).observe(track);
+
+    // pause behind the lightbox / video modal, resume when it closes
+    $$('[data-video], [data-photo]').forEach((b) => b.addEventListener('click', () => setTimeout(syncPreviews, 0)));
+    modal.addEventListener('close', syncPreviews);
+    // iOS Low Power Mode: clips may only start from a user gesture, so retry on taps/clicks
+    ['touchend', 'click', 'keydown'].forEach((t) => document.addEventListener(t, syncPreviews, { passive: true }));
+  }
 
   /* ---------- service CTA → preselect service in the form ---------- */
   const serviceSelect = $('[data-service-select]');
